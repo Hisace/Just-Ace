@@ -24,9 +24,9 @@ module.exports = {
             // Check if the bot is mentioned in the message
             if (message.mentions.has(client.user)) {
                 const mentionReply = new EmbedBuilder()
-                    .setAuthor({ name: `${message.author.tag}`, iconURL: message.author.displayAvatarURL() })
-                    .setDescription(`Sup ${message.author.tag}!\nMy prefix here: \`${serverPrefix}\`\n\n Use \`${serverPrefix}help\` to get my command's list.`)
-                    .setColor(client.noColorEmbed)
+                    .setAuthor({ name: `Sup ${message.author.tag}!`, iconURL: message.author.displayAvatarURL() })
+                    .setDescription(`My prefix here: \`${serverPrefix}\`\n\n Use \`${serverPrefix}help\` to get my command's list.`)
+                    .setColor(client.noColor)
                     .setFooter({ text: "IDK what to put here!", iconURL: client.user.displayAvatarURL() });
                 
                 const inviteMe = new ButtonBuilder()
