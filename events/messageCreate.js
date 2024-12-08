@@ -1,5 +1,6 @@
 const GuildSettings = require('../models/GuildSettings');
 const UserSettings = require('../models/UserSettings');
+const { checkPermissions } = require('../handlers/permissionHandler');
 require('dotenv').config();
 const { ActionRowBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
@@ -70,6 +71,9 @@ module.exports = {
 
                 return message.reply({ embeds: [embed], ephemeral: true });
             }
+
+            if (!checkPermissions(message, command.requiredPermissions, true)) return; // Bot permissions
+            if (!checkPermissions(message, command.userPermissions, false)) return; // User permissions
 
             // Execute the command
             await command.execute(message, args);
