@@ -30,7 +30,7 @@ module.exports = {
                 
                 const inviteMe = new ButtonBuilder()
                     .setLabel('Invite Me')
-                    .setURL('https://discord.com/oauth2/authorize?client_id=1248329993193263134&permissions=8&integration_type=0&scope=bot+applications.commands')
+                    .setURL('https://discordapp.com/oauth2/authorize?client_id=1314896219977416705')
                     .setStyle(ButtonStyle.Link);
                 
                 const support = new ButtonBuilder()

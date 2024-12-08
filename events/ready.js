@@ -9,7 +9,7 @@ module.exports = {
       
       const guild = client.guilds.cache.get(process.env.GUILD_ID);
       if (guild) {
-        await guild.commands.set(client.commands.map(cmd => cmd.data));
+        await guild.commands.set(client.slashCommands.map(cmd => cmd.data));
         console.log('Guild Commands registered');
       } else {
         console.log('Guild not found');
