@@ -8,10 +8,10 @@ require('dotenv').config();
 
 const client = new Client({ intents: [ Guilds, GuildMessages, MessageContent ]});
 
-//(async () => {
-//    await connectDB();
-//    await syncModels();
-//})();
+(async () => {
+    await connectDB();
+    await syncModels();
+})();
 
 loadEvents(client);
 loadPrefixCommands(client);
