@@ -45,7 +45,7 @@ function loadPrefixCommands(client) {
     .map(dirent => dirent.name);
 
   for (const dir of commandDirs) {
-    const folderPath = path.join(__dirname, '../commands/prefixed', dir);
+    const folderPath = path.join(__dirname, '../commands/prefix', dir);
     const commandFiles = fs.readdirSync(folderPath).filter(file => file.endsWith('.js'));
     
     for (const file of commandFiles) {
