@@ -1,21 +1,14 @@
 const GuildSettings = require('../../../models/GuildSettings');
-const { PermissionFlagsBits, EmbedBuilder } = require('discord.js');
+const { PermissionsBitField, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'prefix',
     description: 'Set the bot prefix in this server.',
     usage: '<prefix>',
-    requiredPermissions: [PermissionFlagsBits.Administrator],
-    userPermissions: [PermissionFlagsBits.Administrator],
+    requiredPermissions: [PermissionsBitField.Flags.Administrator],
+    userPermissions: [PermissionsBitField.Flags.Administrator],
     owner: false,
     async execute(message, args) {
-        // Check permissions
-        if (!message.member.permissions.has(PermissionFlagsBits.Administrator)) {
-            const errorEmbed = new EmbedBuilder()
-                .setDescription('You do not have permission to use this command.')
-                .setColor(0xc72c3b);
-            return message.channel.send({ embeds: [errorEmbed] });
-        }
 
         // Check if a prefix is provided
         if (!args[0]) {
