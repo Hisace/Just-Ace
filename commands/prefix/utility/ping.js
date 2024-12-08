@@ -1,10 +1,11 @@
-const { PermissionFlagsBits, EmbedBuilder } = require('discord.js');
+const { PermissionsBitField, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'ping',
     description: 'Check the bot\'s latency to the Discord API and WebSocket.',
     usage: '',
-    permissions: [PermissionFlagsBits.SendMessages],
+    requiredPermissions: [PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.EmbedLinks],
+    userPermissions: [],
     owner: false,
     async execute(message, args) {
         // Get websocket heartbeat
