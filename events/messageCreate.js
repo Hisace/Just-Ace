@@ -22,7 +22,7 @@ module.exports = {
             const serverPrefix = guildSettings.prefix;
             
             // Check if the bot is mentioned in the message
-            if (message.mentions.has(client.user)) {
+            if (message.mentions.has(client.user) && message.content.trim() === `<@${client.user.id}>`) {
                 const mentionReply = new EmbedBuilder()
                     .setAuthor({ name: `Sup ${message.author.tag}!`, iconURL: message.author.displayAvatarURL() })
                     .setDescription(`My prefix here: \`${serverPrefix}\`\n\n Use \`${serverPrefix}help\` to get my command's list.`)
