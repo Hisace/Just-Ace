@@ -3,7 +3,7 @@ const { PermissionsBitField, EmbedBuilder } = require('discord.js');
 module.exports = {
     name: 'avatar',
     description: "Displays a user's avatar.",
-    usage: '<user>',
+    usage: '[user]',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks, PermissionsBitField.Flags.AttachFiles],
     userPermissions: [],
     owner: false,

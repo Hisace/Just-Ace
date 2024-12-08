@@ -4,7 +4,7 @@ module.exports = {
     name: 'echo',
     aliases: ['repeat', 'say'],
     description: 'Echoes back the provided message.',
-    usage: '[message]',
+    usage: '<message>',
     requiredPermissions: [PermissionsBitField.Flags.Administrator],
     userPermissions: [PermissionsBitField.Flags.Administrator],
     owner: false,

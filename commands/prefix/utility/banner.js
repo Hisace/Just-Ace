@@ -5,7 +5,7 @@ require('dotenv').config();
 module.exports = {
     name: 'banner',
     description: "Displays a user's banner.",
-    usage: '<user>',
+    usage: '[user]',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks, PermissionsBitField.Flags.AttachFiles],
     userPermissions: [],
     owner: false,
