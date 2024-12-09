@@ -8,6 +8,10 @@ const UserSettings = sequelize.define('UserSettings', {
       primaryKey: true,
       allowNull: false,
     },
+    lastfmUsername: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     blocked: {
         type: DataTypes.TINYINT,
         defaultValue: 0,
