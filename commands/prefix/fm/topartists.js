@@ -4,8 +4,8 @@ const LastFm = require('../../../models/LastFm');
 require('dotenv').config();
 
 module.exports = {
-    name: 'toptracks',
-    description: 'Displays the user\'s top tracks over a specified time period.',
+    name: 'topartists',
+    description: 'Displays the user\'s top artists over a specified time period.',
     usage: '[timeperiod]',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],
@@ -45,10 +45,10 @@ module.exports = {
 
             const username = user.lastfmUsername;
 
-            // Fetch the user's top tracks from Last.fm API
+            // Fetch the user's top artists from Last.fm API
             const response = await axios.get('http://ws.audioscrobbler.com/2.0/', {
                 params: {
-                    method: 'user.gettoptracks',
+                    method: 'user.gettopartists',
                     user: username,
                     api_key: apiKey,
                     format: 'json',
@@ -57,22 +57,21 @@ module.exports = {
                 },
             });
 
-            const topTracks = response.data.toptracks.track;
+            const topArtists = response.data.topartists.artist;
 
-            if (!topTracks || topTracks.length === 0) {
-                const noTracksEmbed = new EmbedBuilder()
+            if (!topArtists || topArtists.length === 0) {
+                const noArtistsEmbed = new EmbedBuilder()
                     .setColor('#FF0000')
-                    .setDescription('No top tracks found for the specified period!');
-                return await message.reply({ embeds: [noTracksEmbed], allowedMentions: { repliedUser: false } });
+                    .setDescription('No top artists found for the specified period!');
+                return await message.reply({ embeds: [noArtistsEmbed], allowedMentions: { repliedUser: false } });
             }
 
-            // Build the list of top tracks
-            const trackList = topTracks.map((track, index) => {
-                const trackName = track.name;
-                const artistName = track.artist.name;
-                const playCount = track.playcount;
+            // Build the list of top artists
+            const artistList = topArtists.map((artist, index) => {
+                const artistName = artist.name;
+                const playCount = artist.playcount;
 
-                return `**${index + 1}.** [${trackName}](https://www.last.fm/music/${encodeURIComponent(artistName)}/_/${encodeURIComponent(trackName)}) by **${artistName}** (${playCount} plays)`;
+                return `**${index + 1}.** [${artistName}](https://www.last.fm/music/${encodeURIComponent(artistName)}) (${playCount} plays)`;
             });
 
             // Fetch user info from the Last.fm API
@@ -92,19 +91,19 @@ module.exports = {
             // Create the embed
             const embed = new EmbedBuilder()
                 .setColor(message.client.noColor)
-                .setAuthor({name: `Top Tracks for ${username} (${args[0]?.toUpperCase() || '7D'})`, iconURL: message.author.displayAvatarURL() })
-                .setDescription(trackList.join('\n'))
+                .setAuthor({ name: `Top Artists for ${username} (${args[0]?.toUpperCase() || '7D'})`, iconURL: message.author.displayAvatarURL() })
+                .setDescription(artistList.join('\n'))
                 .setFooter({ text: `Total Scrobbles ${totalScrobbles}.` });
-            
+
             if (avatar) embed.setThumbnail(avatar);
 
             await message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
         } catch (error) {
-            console.error('Error fetching top tracks:', error.message);
+            console.error('Error fetching top artists:', error.message);
 
             const errorEmbed = new EmbedBuilder()
                 .setColor('#FF0000')
-                .setDescription('Failed to fetch your top tracks. Please try again later.');
+                .setDescription('Failed to fetch your top artists. Please try again later.');
             await message.reply({ embeds: [errorEmbed], allowedMentions: { repliedUser: false } });
         }
     },
