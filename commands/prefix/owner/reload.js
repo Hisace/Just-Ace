@@ -56,7 +56,7 @@ module.exports = {
         loadSlashCommands(message.client);
 
         const embed = new EmbedBuilder()
-                .setColor('#FF0000')
+                .setColor(message.client.noColor)
                 .setAuthor({ name: 'Reload of commands was successful.', iconURL: message.client.user.displayAvatarURL()})
         return message.reply({ embeds: [embed] });
 
