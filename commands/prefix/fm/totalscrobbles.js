@@ -6,6 +6,7 @@ require('dotenv').config();
 module.exports = {
     name: 'totalscrobbles',
     description: 'Fetches the total number of scrobbles by a user.',
+    aliases: ['ts'],
     usage: '',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],

@@ -6,6 +6,7 @@ require('dotenv').config();
 module.exports = {
     name: 'toptracks',
     description: 'Displays the user\'s top tracks over a specified time period.',
+    aliases: ['tt'],
     usage: '[timeperiod]',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],

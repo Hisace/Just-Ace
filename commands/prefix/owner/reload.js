@@ -5,6 +5,7 @@ const { loadSlashCommands, loadPrefixCommands } = require('../../../handlers/com
 module.exports = {
     name: 'reload',
     description: 'Reloads all command modules, including prefixed and slash commands.',
+    aliases: ['rl'],
     requiredPermissions: [],
     userPermissions: [],
     owner: true,

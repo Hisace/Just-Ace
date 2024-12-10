@@ -5,6 +5,7 @@ require('dotenv').config();
 module.exports = {
     name: 'trackinfo',
     description: 'Get detailed information about a specific track.',
+    aliases: ['ti'],
     usage: '!trackinfo <track name> [artist name]',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],

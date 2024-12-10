@@ -4,6 +4,7 @@ const { EmbedBuilder } = require('discord.js');
 module.exports = {
     name: 'blacklist',
     description: 'Bans or unbans a user from using the bot, or shows a list of banned users.',
+    aliases: ['bl'],
     usage: '[userID]',
     requiredPermissions: [],
     userPermissions: [],

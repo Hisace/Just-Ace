@@ -6,6 +6,7 @@ require('dotenv').config();
 module.exports = {
     name: 'topartists',
     description: 'Displays the user\'s top artists over a specified time period.',
+    aliases: ['tar'],
     usage: '[timeperiod]',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],
