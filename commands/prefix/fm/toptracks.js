@@ -4,20 +4,29 @@ const LastFm = require('../../../models/LastFm');
 require('dotenv').config();
 
 module.exports = {
-    name: 'recent',
-    description: 'Displays the user\'s last few scrobbled tracks.',
-    usage: '!recent [number]',
+    name: 'toptracks',
+    description: 'Displays the user\'s top tracks over a specified time period.',
+    usage: '!toptracks [timeperiod]',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],
     owner: false,
     execute: async (message, args) => {
         const apiKey = process.env.LASTFM_API_KEY;
-        const numberOfTracks = args[0] ? parseInt(args[0], 10) : 5; // Default to 5 if no number is provided
+        const period = args[0]?.toLowerCase() || '7d'; // Default to 7 days if no period is provided
 
-        if (isNaN(numberOfTracks) || numberOfTracks <= 0 || numberOfTracks > 10) {
+        const validPeriods = {
+            '7d': '7day',
+            '1m': '1month',
+            '3m': '3month',
+            '6m': '6month',
+            '12m': '12month',
+            'alltime': 'overall',
+        };
+
+        if (!validPeriods[period]) {
             const errorEmbed = new EmbedBuilder()
                 .setColor('#FF0000')
-                .setDescription('Please provide a valid number between **1** and **10**.');
+                .setDescription('Invalid time period. Use one of the following: `7d`, `1m`, `3m`, `6m`, `12m`, or `alltime`.');
             return await message.reply({ embeds: [errorEmbed], allowedMentions: { repliedUser: false } });
         }
 
@@ -36,35 +45,34 @@ module.exports = {
 
             const username = user.lastfmUsername;
 
-            // Fetch the user's recent tracks from Last.fm API
+            // Fetch the user's top tracks from Last.fm API
             const response = await axios.get('http://ws.audioscrobbler.com/2.0/', {
                 params: {
-                    method: 'user.getrecenttracks',
+                    method: 'user.gettoptracks',
                     user: username,
                     api_key: apiKey,
                     format: 'json',
-                    limit: numberOfTracks,
+                    period: validPeriods[period],
+                    limit: 10,
                 },
             });
 
-            const recentTracks = response.data.recenttracks.track;
+            const topTracks = response.data.toptracks.track;
 
-            if (!recentTracks || recentTracks.length === 0) {
+            if (!topTracks || topTracks.length === 0) {
                 const noTracksEmbed = new EmbedBuilder()
                     .setColor('#FF0000')
-                    .setDescription('You haven\'t scrobbled any tracks yet!');
+                    .setDescription('No top tracks found for the specified period!');
                 return await message.reply({ embeds: [noTracksEmbed], allowedMentions: { repliedUser: false } });
             }
 
-            // Build the list of tracks
-            const trackList = recentTracks.map((track, index) => {
+            // Build the list of top tracks
+            const trackList = topTracks.map((track, index) => {
                 const trackName = track.name;
-                const artistName = track.artist['#text'];
-                const timestamp = track.date
-                    ? `<t:${Math.floor(track.date.uts)}:R>` // Discord relative timestamp
-                    : '*Now Playing*';
+                const artistName = track.artist.name;
+                const playCount = track.playcount;
 
-                return `**${index + 1}.** [${trackName}](https://www.last.fm/music/${encodeURIComponent(artistName)}/_/${encodeURIComponent(trackName)}) by **${artistName}** (${timestamp})`;
+                return `**${index + 1}.** [${trackName}](https://www.last.fm/music/${encodeURIComponent(artistName)}/_/${encodeURIComponent(trackName)}) by **${artistName}** (${playCount} plays)`;
             });
 
             // Fetch user info from the Last.fm API
@@ -84,7 +92,7 @@ module.exports = {
             // Create the embed
             const embed = new EmbedBuilder()
                 .setColor(message.client.noColor)
-                .setAuthor({name: `Recent Tracks for ${username}`, iconURL: message.author.displayAvatarURL() })
+                .setAuthor({name: `Top Tracks for ${username} (${args[0]?.toUpperCase() || '7D'})`, iconURL: message.author.displayAvatarURL() })
                 .setDescription(trackList.join('\n'))
                 .setFooter({ text: `Total Scrobbles ${totalScrobbles}.` });
             
@@ -92,11 +100,11 @@ module.exports = {
 
             await message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
         } catch (error) {
-            console.error('Error fetching recent tracks:', error.message);
+            console.error('Error fetching top tracks:', error.message);
 
             const errorEmbed = new EmbedBuilder()
                 .setColor('#FF0000')
-                .setDescription('Failed to fetch your recent tracks. Please try again later.');
+                .setDescription('Failed to fetch your top tracks. Please try again later.');
             await message.reply({ embeds: [errorEmbed], allowedMentions: { repliedUser: false } });
         }
     },
