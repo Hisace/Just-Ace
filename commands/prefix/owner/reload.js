@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { loadSlashCommands, loadPrefixCommands } = require('../../../handlers/commandHandler');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'reload',
@@ -54,6 +55,10 @@ module.exports = {
         message.client.slashCategories.clear();
         loadSlashCommands(message.client);
 
-        return message.reply('All commands have been reloaded successfully.');
+        const embed = new EmbedBuilder()
+                .setColor('#FF0000')
+                .setAuthor({ name: 'Reload of commands was successful.', iconURL: message.client.user.displayAvatarURL()})
+        return message.reply({ embeds: [embed] });
+
     },
 };

@@ -66,8 +66,7 @@ module.exports = {
             if (userSettings && userSettings.blocked) {
                 const embed = new EmbedBuilder()
                     .setColor('#FF0000')
-                    .setTitle('Blocked User')
-                    .setDescription('You are blocked from using this bot.');
+                    .setAuthor({ name: 'You are blocked from using this bot.', iconURL: client.user.displayAvatarURL()});
 
                 return message.reply({ embeds: [embed], ephemeral: true });
             }
@@ -79,8 +78,11 @@ module.exports = {
             await command.execute(message, args);
 
         } catch (error) {
-            console.error('Error executing command:', error);
-            message.reply({ content: 'There was an error executing that command.', ephemeral: true });
+            console.error('Error executing command:', error.message);
+            const embed = new EmbedBuilder()
+                .setColor('#FF0000')
+                .setAuthor({ name: 'There was an error while executing the command.', iconURL: client.user.displayAvatarURL()})
+            message.reply({ embeds: [embed] });
         }
     },
 };
