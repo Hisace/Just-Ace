@@ -5,7 +5,7 @@ module.exports = {
     name: 'prefix',
     description: 'Set the bot prefix in this server.',
     usage: '<prefix>',
-    requiredPermissions: [],
+    requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [PermissionsBitField.Flags.Administrator],
     owner: false,
     async execute(message, args) {
