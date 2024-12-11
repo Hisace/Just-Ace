@@ -19,9 +19,6 @@ loadPrefixCommands(client);
 loadSlashCommands(client);
 checkRatelimt(process.env.DISCORD_TOKEN);
 
-const guildSettings = await GuildSettings.findOne({ where: { guildId: message.guild.id } });
-
-client.prefix = guildSettings.prefix;
 client.emoji = require('./assets/emojis.json');
 client.color = require('./assets/colors.json');
 client.noColor = '2B2D31',
