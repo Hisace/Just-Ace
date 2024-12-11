@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 const { loadSlashCommands, loadPrefixCommands } = require('../../../handlers/commandHandler');
-const { EmbedBuilder } = require('discord.js');
+const { PermissionsBitField, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'reload',
     description: 'Reloads all command modules, including prefixed and slash commands.',
     aliases: ['rl'],
-    requiredPermissions: [],
+    requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],
     owner: true,
     async execute(message, args) {
