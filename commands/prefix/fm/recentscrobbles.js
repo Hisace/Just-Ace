@@ -6,7 +6,8 @@ require('dotenv').config();
 module.exports = {
     name: 'recent',
     description: 'Displays the user\'s last few scrobbled tracks.',
-    usage: '!recent [number]',
+    aliases: ['r'],
+    usage: '[number]',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],
     owner: false,
