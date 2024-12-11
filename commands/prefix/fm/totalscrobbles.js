@@ -7,7 +7,6 @@ module.exports = {
     name: 'totalscrobbles',
     description: 'Fetches the total number of scrobbles by a user.',
     aliases: ['ts'],
-    usage: '',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],
     owner: false,
@@ -22,7 +21,7 @@ module.exports = {
                 const noUserEmbed = new EmbedBuilder()
                     .setColor('#FF0000')
                     .setDescription(
-                        "You haven't set your Last.fm username yet. Use the `!setlastfm` command to link your account."
+                        "You haven't set your Last.fm account yet. Use the `!setlastfm` command to link your account."
                     );
                 return await message.reply({ embeds: [noUserEmbed], allowedMentions: { repliedUser: false } });
             }
