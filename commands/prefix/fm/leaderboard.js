@@ -7,7 +7,6 @@ module.exports = {
     name: 'leaderboard',
     description: 'Displays a leaderboard for the server\'s most active listeners.',
     aliases: ['lb'],
-    usage: '',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],
     owner: false,
