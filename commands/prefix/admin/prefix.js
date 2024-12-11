@@ -12,10 +12,14 @@ module.exports = {
 
         // Check if a prefix is provided
         if (!args[0]) {
-            const errorEmbed = new EmbedBuilder()
-                .setDescription('Please provide a new prefix.')
-                .setColor(0xc72c3b);
-            return message.channel.send({ embeds: [errorEmbed] });
+            const guildSettings = await GuildSettings.findOne({ where: { guildId: message.guild.id }});
+
+            const serverPrefix = guildSettings.prefix;
+
+            const Embed = new EmbedBuilder()
+                .setAuthor({ name: `My prefix in this server is ${serverPrefix}`, iconURL: message.client.user.displayAvatarURL()})
+                .setColor(message.client.noColor);
+            return message.channel.send({ embeds: [Embed] });
         }
 
         const newPrefix = args[0];
@@ -25,12 +29,13 @@ module.exports = {
             await GuildSettings.update({ prefix: newPrefix }, { where: { guildId: message.guild.id } });
             const successEmbed =  new EmbedBuilder()
                 .setDescription(`Prefix set to \`${newPrefix}\``)
+                .setColor(message.client.noColor);
             message.channel.send({ embeds: [successEmbed] });
         } catch (error) {
             const errorEmbed = new EmbedBuilder()
-                .setDescription('There was an error setting the prefix.')
+                .setAuthor({ name: 'There was an error setting the prefix.', iconURL:message.client.user.displayAvatarURL() })
                 .setColor(0xc72c3b);
-            console.error('Error setting prefix:', error);
+            console.error('Error setting prefix:', error.message);
             return message.channel.send({ embeds: [errorEmbed] });
         }
     },
