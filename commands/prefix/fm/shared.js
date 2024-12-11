@@ -6,7 +6,7 @@ require('dotenv').config();
 module.exports = {
     name: 'shared',
     description: 'Find shared artists or tracks between you and others in the server.',
-    usage: '!shared [artists|tracks]',
+    usage: '[artists|tracks]',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],
     owner: false,
@@ -19,7 +19,7 @@ module.exports = {
             const errorEmbed = new EmbedBuilder()
                 .setColor('#FF0000')
                 .setDescription(
-                    "Invalid argument. Use `!shared artists` to compare artists or `!shared tracks` to compare tracks."
+                    "Invalid argument. Use `!shared artists` or `!shared tracks`."
                 );
             return await message.reply({ embeds: [errorEmbed], allowedMentions: { repliedUser: false } });
         }
@@ -32,7 +32,7 @@ module.exports = {
                 const noUserEmbed = new EmbedBuilder()
                     .setColor('#FF0000')
                     .setDescription(
-                        "You haven't set your Last.fm username yet. Use the `!setlastfm` command to link your account."
+                        "You haven't set your Last.fm account yet. Use the `!setlastfm` command to link your account."
                     );
                 return await message.reply({ embeds: [noUserEmbed], allowedMentions: { repliedUser: false } });
             }
