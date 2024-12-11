@@ -13,7 +13,7 @@ module.exports = {
         // Create embed
         const embed = new EmbedBuilder()
         	.setColor(message.client.noColor)
-          .setAuthor({ name: `Pong in \`${websocketHeartbeat}ms\``, iconURL: message.client.user.displayAvatarURL() });
+          .setAuthor({ name: `Pong in ${websocketHeartbeat}ms`, iconURL: message.client.user.displayAvatarURL() });
 
         // Edit the sent message with the embed
         await message.reply({ embeds: [embed], allowedMentions: { repliedUser: false} });
