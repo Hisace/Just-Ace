@@ -20,6 +20,7 @@ module.exports = {
 
             // Extract prefix from guildSettings
             const serverPrefix = guildSettings.prefix;
+            message.client.prefix = serverPrefix;
             
             // Check if the bot is mentioned in the message
             if (message.mentions.has(client.user) && message.content.trim() === `<@${client.user.id}>`) {
