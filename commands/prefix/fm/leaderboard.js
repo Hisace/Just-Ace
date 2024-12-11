@@ -21,7 +21,7 @@ module.exports = {
                 const noUsersEmbed = new EmbedBuilder()
                     .setColor('#FF0000')
                     .setDescription(
-                        "No users have linked their Last.fm accounts in this server. Use the `!setlastfm` command to start!"
+                        `No users have linked their Last.fm accounts in this server. Use the \`${message.client.prefix}setlastfm\` command to start!`
                     );
                 return await message.reply({ embeds: [noUsersEmbed], allowedMentions: { repliedUser: false } });
             }

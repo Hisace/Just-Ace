@@ -19,7 +19,7 @@ module.exports = {
             const errorEmbed = new EmbedBuilder()
                 .setColor('#FF0000')
                 .setDescription(
-                    "Invalid argument. Use `!shared artists` or `!shared tracks`."
+                    `Invalid argument. Use \`${message.client.prefix}shared artists\` or \`${message.client.prefix}shared tracks\`.`
                 );
             return await message.reply({ embeds: [errorEmbed], allowedMentions: { repliedUser: false } });
         }
@@ -32,7 +32,7 @@ module.exports = {
                 const noUserEmbed = new EmbedBuilder()
                     .setColor('#FF0000')
                     .setDescription(
-                        "You haven't set your Last.fm account yet. Use the `!setlastfm` command to link your account."
+                        `You haven't set your Last.fm account yet. Use the \`${message.client.prefix}setlastfm\` command to link your account.`
                     );
                 return await message.reply({ embeds: [noUserEmbed], allowedMentions: { repliedUser: false } });
             }

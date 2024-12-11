@@ -6,7 +6,7 @@ module.exports = {
     name: 'trackinfo',
     description: 'Get detailed information about a specific track.',
     aliases: ['ti'],
-    usage: '!trackinfo <track name> [artist name]',
+    usage: '<track name>',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],
     owner: false,
@@ -18,7 +18,7 @@ module.exports = {
         if (!trackQuery) {
             const errorEmbed = new EmbedBuilder()
                 .setColor('#FF0000')
-                .setDescription('Please provide a track name. Example: `!trackinfo Bohemian Rhapsody`');
+                .setDescription(`Please provide a track name. Example: \`${message.client.prefix}trackinfo Bohemian Rhapsody\``);
             return await message.reply({ embeds: [errorEmbed], allowedMentions: { repliedUser: false } });
         }
 
