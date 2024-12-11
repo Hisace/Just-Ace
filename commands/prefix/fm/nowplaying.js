@@ -7,7 +7,6 @@ module.exports = {
     name: 'nowplaying',
     description: 'Displays the currently playing or last scrobbled track for a user.',
     aliases: ['np', 'fm', 'now'],
-    usage: '',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],
     owner: false,
