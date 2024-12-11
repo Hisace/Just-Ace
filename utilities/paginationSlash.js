@@ -15,7 +15,7 @@ module.exports = async (interaction, pages, time = 30 * 1000) => {
 
         const first = new ButtonBuilder()
         .setCustomId('pagefirst')
-        .setEmoji('<:previous:1251936463570993182> ')
+        .setEmoji('⏪')
         .setStyle(ButtonStyle.Secondary)
         .setDisabled(true);
 
@@ -33,12 +33,12 @@ module.exports = async (interaction, pages, time = 30 * 1000) => {
 
         const next = new ButtonBuilder()
         .setCustomId('pagenext')
-        .setEmoji('<:resume:1251936469120057385> ')
+        .setEmoji('▶️')
         .setStyle(ButtonStyle.Secondary);
 
         const last = new ButtonBuilder()
         .setCustomId('pagelast')
-        .setEmoji('<:next:1251936456599932988> ')
+        .setEmoji('⏩')
         .setStyle(ButtonStyle.Secondary);
 
         const buttons = new ActionRowBuilder().addComponents([first, prev, pageCount, next, last]);
@@ -99,7 +99,7 @@ module.exports = async (interaction, pages, time = 30 * 1000) => {
         });
 
         return msg;
-    } catch (e) {
-        console.error(`[ERROR] ${error}`);
+    } catch (error) {
+        console.error(`[ERROR]:`, error.message);
     }
 };
