@@ -7,7 +7,6 @@ require('dotenv').config();
 module.exports = {
     name: 'setlastfm',
     description: 'Set and verify your Last.fm username with the bot.',
-    usage: '',
     requiredPermissions: [PermissionsBitField.Flags.EmbedLinks],
     userPermissions: [],
     owner: false,
